@@ -19,3 +19,8 @@ dist/
 
 # Node modules (if you add any tooling later)
 node_modules/
+
+# Grunt files
+Gruntfile.js
+package.json
+package-lock.json
