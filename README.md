@@ -2,7 +2,7 @@
 
 > Find Firefox alternatives for your Chrome extensions with intelligent matching
 
-[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/yourusername/extension-bridge)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/michaelnyc17/extension-bridge)
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-brightgreen.svg)](https://chrome.google.com/webstore)
 
