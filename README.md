@@ -38,10 +38,10 @@ Extension Bridge is a Chrome extension that helps users transitioning to Firefox
 
 ## 📸 Screenshots
 
-![Extension Bridge Welcome Screen](screenshots/welcome.png)
-![Main Interface](screenshots/main.png)
-![Comparison View](screenshots/comparison.png)
-![Export Options](screenshots/export.png)
+![Extension Bridge Welcome Screen](screenshots/welcomepage.png)
+![Main Interface](screenshots/maininterface.png)
+![Comparison View](screenshots/comparisonview.png)
+![Export Options](screenshots/exportoptions.png)
 
 ## 🚀 Installation
 
@@ -119,7 +119,7 @@ This software is source-available for viewing purposes only. See [LICENSE](./LIC
 
 ## 🐛 Bug Reports & Feature Requests
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/yourusername/extension-bridge/issues).
+Found a bug or have a feature request? Please [open an issue](https://github.com/michaelnyc17/extension-bridge/issues).
 
 ## 📧 Contact
 
