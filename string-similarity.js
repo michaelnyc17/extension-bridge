@@ -1,0 +1,176 @@
+// Copyright (c) 2025 ExtensionBridge. All Rights Reserved.
+
+// Unauthorized copying, distribution, or use is strictly prohibited.
+
+
+/**
+ * String Similarity Utilities
+ * Provides text matching algorithms for comparing extension names and descriptions
+ */
+
+const StringSimilarity = {
+    /**
+     * Normalize text for comparison
+     */
+    normalize(text) {
+        if (!text) return '';
+        // Ensure text is a string
+        if (typeof text !== 'string') {
+            text = String(text);
+        }
+        return text
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s]/g, '') // Remove special characters
+            .replace(/\s+/g, ' '); // Normalize whitespace
+    },
+
+    /**
+     * Calculate Levenshtein distance between two strings
+     */
+    levenshteinDistance(str1, str2) {
+        const s1 = this.normalize(str1);
+        const s2 = this.normalize(str2);
+
+        if (s1 === s2) return 0;
+        if (s1.length === 0) return s2.length;
+        if (s2.length === 0) return s1.length;
+
+        const matrix = [];
+
+        // Initialize matrix
+        for (let i = 0; i <= s2.length; i++) {
+            matrix[i] = [i];
+        }
+        for (let j = 0; j <= s1.length; j++) {
+            matrix[0][j] = j;
+        }
+
+        // Fill matrix
+        for (let i = 1; i <= s2.length; i++) {
+            for (let j = 1; j <= s1.length; j++) {
+                if (s2.charAt(i - 1) === s1.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1, // substitution
+                        matrix[i][j - 1] + 1,     // insertion
+                        matrix[i - 1][j] + 1      // deletion
+                    );
+                }
+            }
+        }
+
+        return matrix[s2.length][s1.length];
+    },
+
+    /**
+     * Calculate similarity score (0-100) based on Levenshtein distance
+     */
+    getSimilarityScore(str1, str2) {
+        const s1 = this.normalize(str1);
+        const s2 = this.normalize(str2);
+
+        if (s1 === s2) return 100;
+        if (!s1 || !s2) return 0;
+
+        const distance = this.levenshteinDistance(str1, str2);
+        const maxLength = Math.max(s1.length, s2.length);
+        const similarity = ((maxLength - distance) / maxLength) * 100;
+
+        return Math.max(0, Math.min(100, similarity));
+    },
+
+    /**
+     * Extract domain from URL
+     */
+    extractDomain(url) {
+        if (!url) return '';
+        try {
+            const urlObj = new URL(url);
+            return urlObj.hostname.replace(/^www\./, '');
+        } catch (e) {
+            return '';
+        }
+    },
+
+    /**
+     * Check if URLs match (exact, domain, or GitHub repo)
+     */
+    compareUrls(url1, url2) {
+        if (!url1 || !url2) return 0;
+
+        const normalized1 = url1.toLowerCase().trim();
+        const normalized2 = url2.toLowerCase().trim();
+
+        // Exact match
+        if (normalized1 === normalized2) return 100;
+
+        const domain1 = this.extractDomain(url1);
+        const domain2 = this.extractDomain(url2);
+
+        // Same domain
+        if (domain1 && domain2 && domain1 === domain2) {
+            // Check if GitHub repo match
+            if (domain1.includes('github.com')) {
+                const path1 = new URL(url1).pathname.split('/').filter(p => p);
+                const path2 = new URL(url2).pathname.split('/').filter(p => p);
+
+                // Same org and repo
+                if (path1.length >= 2 && path2.length >= 2 &&
+                    path1[0] === path2[0] && path1[1] === path2[1]) {
+                    return 100;
+                }
+                return 90;
+            }
+            return 90;
+        }
+
+        return 0;
+    },
+
+    /**
+     * Extract keywords from text (remove common words)
+     */
+    extractKeywords(text) {
+        if (!text) return [];
+
+        const commonWords = new Set([
+            'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
+            'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been',
+            'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would',
+            'could', 'should', 'may', 'might', 'can', 'this', 'that', 'these',
+            'those', 'extension', 'addon', 'plugin', 'browser', 'chrome', 'firefox'
+        ]);
+
+        return this.normalize(text)
+            .split(/\s+/)
+            .filter(word => word.length > 2 && !commonWords.has(word));
+    },
+
+    /**
+     * Calculate Jaccard similarity between two sets of keywords
+     */
+    jaccardSimilarity(keywords1, keywords2) {
+        if (keywords1.length === 0 && keywords2.length === 0) return 0;
+        if (keywords1.length === 0 || keywords2.length === 0) return 0;
+
+        const set1 = new Set(keywords1);
+        const set2 = new Set(keywords2);
+
+        const intersection = new Set([...set1].filter(x => set2.has(x)));
+        const union = new Set([...set1, ...set2]);
+
+        return (intersection.size / union.size) * 100;
+    },
+
+    /**
+     * Calculate description overlap score (0-100)
+     */
+    compareDescriptions(desc1, desc2) {
+        const keywords1 = this.extractKeywords(desc1);
+        const keywords2 = this.extractKeywords(desc2);
+
+        return this.jaccardSimilarity(keywords1, keywords2);
+    }
+};
