@@ -1,138 +1,133 @@
 # Extension Bridge
 
-> Find Firefox alternatives for your Chrome extensions with intelligent matching
+A Chrome extension that scans your installed extensions and finds Firefox alternatives using Mozilla's Add-ons API.
 
 [![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/michaelnyc17/extension-bridge)
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./LICENSE)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-brightgreen.svg)](https://chrome.google.com/webstore)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-brightgreen.svg)](https://chromewebstore.google.com/detail/extension-bridge/nndehibjibknoihgdlndokaopbdenlin)
 
-## 🌉 About
+## About The Project
 
-Extension Bridge is a Chrome extension that helps users transitioning to Firefox by automatically finding Firefox alternatives for their installed Chrome extensions. Using intelligent matching algorithms and real-time API data from Mozilla's Firefox Add-ons repository, it provides:
+Extension Bridge helps users switching from Chrome to Firefox by automatically matching their Chrome extensions with Firefox alternatives. It uses intelligent matching algorithms and Mozilla's public API to find compatible add-ons.
 
-- **Smart Matching**: Finds exact and similar alternatives based on name, description, and functionality
-- **Export Options**: Export your matches in multiple formats (CSV, JSON, HTML, Text)
-- **Comparison View**: Side-by-side comparison of Chrome extensions vs Firefox alternatives
-- **Portability Analysis**: Assess how easily each extension can be replaced
+Features:
+- Scans installed Chrome extensions
+- Matches with Firefox alternatives (exact, similar, or no match)
+- Side-by-side comparison view
+- Export results in multiple formats (CSV, JSON, HTML, Text)
+- Portability analysis for Manifest V2/V3 compatibility
 
-## ✨ Features
+## Screenshots
 
-### Core Functionality
-- 🔍 **Automatic Scanning**: Scans all installed Chrome extensions
-- 🎯 **Intelligent Matching**: Uses advanced algorithms to find Firefox alternatives
-- 📊 **Match Scoring**: Displays confidence scores for each match
-- 🏷️ **Categorization**: Exact matches, similar matches, and no matches
-
-### Export & Sharing
-- 📄 **Text Export**: Simple URL list
-- 📊 **CSV Export**: Spreadsheet-friendly format with detailed information
-- 💾 **JSON Export**: Structured data for developers
-- 🌐 **HTML Report**: Beautiful, shareable report with statistics
-
-### User Experience
-- 🔍 **Comparison Modal**: Detailed side-by-side comparison
-- 🎨 **Modern UI**: Clean, Apple-inspired design
-- 🌓 **Dark Mode**: Full dark theme support
-- 💾 **Smart Caching**: Fast results with 24-hour cache
-- 🔔 **Notifications**: Get notified about better matches for ignored extensions
-
-## 📸 Screenshots
-
-![Extension Bridge Welcome Screen](screenshots/welcomepage.png)
+![Welcome Screen](screenshots/welcomepage.png)
 ![Main Interface](screenshots/maininterface.png)
 ![Comparison View](screenshots/comparisonview.png)
 ![Export Options](screenshots/exportoptions.png)
 
-## 🚀 Installation
+## Built With
 
-### From Chrome Web Store (Recommended)
-1. Visit the [Chrome Web Store page](#)
-2. Click "Add to Chrome"
-3. Confirm the installation
+- Vanilla JavaScript (no frameworks)
+- Chrome Extension Manifest V3
+- Mozilla Add-ons API
+- Chrome Management API
 
-### Manual Installation (Development)
-1. Download the latest release
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode"
-4. Click "Load unpacked" and select the extension directory
+## Installation
 
-## 📖 Usage
+### From Chrome Web Store
+Visit [Extension Bridge on Chrome Web Store](https://chromewebstore.google.com/detail/extension-bridge/nndehibjibknoihgdlndokaopbdenlin) and click "Add to Chrome".
 
-1. **Initial Scan**: Click "Scan Extensions" to analyze your installed Chrome extensions
-2. **Review Matches**: Browse through exact and similar matches
-3. **Compare**: Click "Compare" to see detailed side-by-side information
-4. **Export**: Use the export dropdown to save your matches in various formats
-5. **Install**: Click on Firefox addon links to install alternatives
+### From Source
+1. Download or clone this repository
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable "Developer mode" (top right)
+4. Click "Load unpacked"
+5. Select the extension directory
 
-## 🔧 Technical Details
+## Usage
 
-### Built With
-- **Manifest V3**: Latest Chrome extension API
-- **Vanilla JavaScript**: No framework dependencies
-- **Mozilla Add-ons API**: Real-time Firefox addon data
-- **Chrome Management API**: Access to installed extensions
+### Basic Usage
+1. Click the Extension Bridge icon in your browser toolbar
+2. Click "Scan Extensions" to analyze your installed Chrome extensions
+3. Review the matches categorized by confidence level:
+   - **Exact**: Same name and developer
+   - **Similar**: Likely alternatives based on name/description
+   - **No Match**: No Firefox alternative found
+4. Click "Compare" on any extension to see detailed side-by-side information
+5. Click Firefox add-on links to install alternatives
 
-### Architecture
-```
-ExtensionBridge/
-├── popup.html          # Main UI
-├── popup.js            # Core logic & UI orchestration
-├── styles.css          # Styling (Apple-inspired design)
-├── matcher.js          # Matching algorithm
-├── portability.js      # Portability analysis
-└── manifest.json       # Extension configuration
-```
+### Export Results
+1. Click the "Export" button
+2. Choose your preferred format:
+   - **Text**: Simple list of Firefox add-on URLs
+   - **CSV**: Spreadsheet format with full details
+   - **JSON**: Structured data for developers
+   - **HTML**: Formatted report with statistics
+
+## How It Works
 
 ### Matching Algorithm
-The extension uses a sophisticated scoring system that considers:
+The extension uses a scoring system that considers:
 - Name similarity (Levenshtein distance)
-- Description matching
+- Description text matching
 - Developer/publisher matching
 - Homepage URL comparison
 - Keyword overlap
 
-## 🛡️ Privacy & Security
+### Data Sources
+- **Local**: Chrome extension data via `chrome.management` API
+- **Remote**: Firefox add-on data from `https://addons.mozilla.org/api/`
 
-- **No Data Collection**: Your extension data never leaves your browser
-- **Local Storage Only**: Results cached locally for performance
-- **No Tracking**: No analytics or user tracking
-- **Mozilla API Only**: Only fetches public data from Firefox Add-ons API
+Results are cached locally for 24 hours to improve performance.
 
-## 📋 Permissions
+## File Structure
 
-The extension requires:
-- `management`: To read your installed Chrome extensions
-- `storage`: To cache results locally
-- `https://addons.mozilla.org/*`: To fetch Firefox addon data
+```
+ExtensionBridge/
+├── manifest.json           # Extension configuration
+├── popup.html              # Main UI
+├── popup.js                # Core logic & UI
+├── styles.css              # Styling
+├── matcher.js              # Matching algorithm
+├── portability.js          # Portability analysis
+├── firefox-api.js          # Mozilla API wrapper
+└── string-similarity.js    # String comparison utilities
+```
 
-## 🤝 Contributing
+## Privacy
 
-**Note**: This is source-available software. The code is viewable for educational purposes, but copying, modification, and redistribution are not permitted. See [LICENSE](./LICENSE) for details.
+Extension Bridge does not collect or transmit user data:
+- All scanning happens locally in your browser
+- Only extension names are sent to Mozilla's public API for searching
+- Results are cached locally only
+- No analytics or tracking
 
-If you'd like to contribute or suggest features, please open an issue.
+See [Privacy Policy](https://michaelnyc17.github.io/extension-bridge/privacy.html) for details.
 
-## 📜 License
+## Permissions
+
+The extension requires the following permissions:
+
+- **management**: Read your installed Chrome extensions
+- **storage**: Cache search results locally
+- **https://addons.mozilla.org/***: Fetch Firefox add-on data from Mozilla's API
+
+## License
 
 Copyright (c) 2025 ExtensionBridge. All Rights Reserved.
 
-This software is source-available for viewing purposes only. See [LICENSE](./LICENSE) for full details.
+This is source-available software. You can view the code, but copying, modification, and redistribution are not permitted. See [LICENSE](./LICENSE) for full details.
 
-## 🐛 Bug Reports & Feature Requests
+## Contributing
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/michaelnyc17/extension-bridge/issues).
+This is source-available software for viewing purposes only. If you'd like to suggest features or report bugs, please [open an issue](https://github.com/michaelnyc17/extension-bridge/issues).
 
-## 📧 Contact
+## Contact
 
-For licensing inquiries or questions:
+For questions or licensing inquiries:
 - Email: kommeymichael1@gmail.com
+- GitHub: [Report an Issue](https://github.com/michaelnyc17/extension-bridge/issues)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- Firefox Add-ons API for providing addon data
-- Chrome Extensions team for the powerful APIs
-- The open-source community for inspiration
-
----
-
-**Made with ❤️ for the browser migration community**
-
+- Mozilla for providing the Firefox Add-ons API
+- Chrome Extensions team for the APIs
