@@ -2,6 +2,8 @@
 
 A Chrome extension that scans your installed extensions and finds Firefox alternatives using Mozilla's Add-ons API.
 
+**Website**: https://michaelnyc17.github.io/extension-bridge/
+
 [![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/michaelnyc17/extension-bridge)
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-brightgreen.svg)](https://chromewebstore.google.com/detail/extension-bridge/nndehibjibknoihgdlndokaopbdenlin)
