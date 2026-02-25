@@ -2,9 +2,9 @@
 
 A Chrome extension that scans your installed extensions and finds Firefox alternatives using Mozilla's Add-ons API.
 
-**Website**: https://michaelnyc17.github.io/extension-bridge/
+**Website**: https://3seventeen.github.io/extension-bridge/
 
-[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/michaelnyc17/extension-bridge)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/3seventeen/extension-bridge)
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Install-brightgreen.svg)](https://chromewebstore.google.com/detail/extension-bridge/nndehibjibknoihgdlndokaopbdenlin)
 
@@ -103,7 +103,7 @@ Extension Bridge does not collect or transmit user data:
 - Results are cached locally only
 - No analytics or tracking
 
-See [Privacy Policy](https://michaelnyc17.github.io/extension-bridge/privacy.html) for details.
+See [Privacy Policy](https://3seventeen.github.io/extension-bridge/privacy.html) for details.
 
 ## Permissions
 
@@ -121,13 +121,13 @@ This is source-available software. You can view the code, but copying, modificat
 
 ## Contributing
 
-This is source-available software for viewing purposes only. If you'd like to suggest features or report bugs, please [open an issue](https://github.com/michaelnyc17/extension-bridge/issues).
+This is source-available software for viewing purposes only. If you'd like to suggest features or report bugs, please [open an issue](https://github.com/3seventeen/extension-bridge/issues).
 
 ## Contact
 
 For questions or licensing inquiries:
 - Email: kommeymichael1@gmail.com
-- GitHub: [Report an Issue](https://github.com/michaelnyc17/extension-bridge/issues)
+- GitHub: [Report an Issue](https://github.com/3seventeen/extension-bridge/issues)
 
 ## Acknowledgments
 
