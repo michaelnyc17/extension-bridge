@@ -126,7 +126,6 @@ This is source-available software for viewing purposes only. If you'd like to su
 ## Contact
 
 For questions or licensing inquiries:
-- Email: kommeymichael1@gmail.com
 - GitHub: [Report an Issue](https://github.com/3seventeen/extension-bridge/issues)
 
 ## Acknowledgments
